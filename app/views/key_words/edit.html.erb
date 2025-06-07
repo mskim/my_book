@@ -1,0 +1,33 @@
+<%= content_for(:title) do %>
+  Edit <%= @key_word.word %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Key_words",
+               link: key_words_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               link: key_word_path(@key_word),
+               text: @key_word.word %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Edit" %>
+  <% end %>
+<% end %>
+
+<% content_for(:side_col) do %>
+  <%= render "key_words/key_word_subnav",
+             active: "edit_key_word",
+             key_word: @key_word %>
+<% end %>
+
+<div class="space-y-12">
+
+  <%= render "shared/components/page_header",
+              title: "Edit key_word" %>
+
+  <%= render 'form',
+              key_word: @key_word %>
+</div>

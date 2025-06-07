@@ -1,0 +1,16 @@
+<%= render "shared/components/subnav/subnav",
+             back_link_path: sections_path do %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: edit_section_path(section),
+             link_text: "Edit Section",
+             icon_name: "square-pen",
+             active: current_page?(edit_section_path(section)) %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: section_path(section),
+             link_text: "View Section",
+             icon_name: "arrow-right",
+             active: current_page?(section_path(section)) %>
+
+<% end %>

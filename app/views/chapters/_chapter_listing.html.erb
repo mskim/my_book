@@ -1,0 +1,7 @@
+<%= render "shared/components/listings/listing",
+           listing_link: chapter_path(chapter),
+           title: chapter.title,
+           description: "Created #{time_ago_in_words(chapter.created_at)} ago" do %>
+  <%= render "chapter_settings",
+             chapter: chapter %>
+<% end %>

@@ -1,0 +1,30 @@
+<%= content_for(:title) do %>
+  <%= @book.title %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Books",
+               link: books_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: @book.title %>
+  <% end %>
+<% end %>
+
+<% content_for(:side_col) do %>
+  <%= render "books/book_subnav",
+             active: "edit_book",
+             book: @book %>
+<% end %>
+
+<div class="space-y-12">
+  <%= render "shared/components/page_header",
+              title: @book.title %>
+
+  <div>
+    This is the show view for the book, <%= @book.title %>.
+  </div>
+
+</div>

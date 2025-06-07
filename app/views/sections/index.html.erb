@@ -1,0 +1,39 @@
+<%= content_for(:title) do %>
+  Sections
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Sections" %>
+  <% end %>
+<% end %>
+
+<div class="space-y-12">
+
+  <% if @sections.any? %>
+    <%= render "shared/components/page_header",
+                title: "Sections",
+                button_link_path: new_section_path %>
+
+    <div class="space-y-6">
+
+      <%= render "shared/components/listings/listings" do %>
+        <% @sections.each do |section| %>
+          <%= render "sections/section_listing",
+                        section: section %>
+        <% end %>
+      <% end %>
+
+      
+
+    </div>
+
+  <% else %>
+    <%= render "shared/components/listings/no_listings",
+                singular_object_name: "section",
+                plural_object_name: "sections",
+                new_path: new_section_path %>
+  <% end %>
+
+</div>

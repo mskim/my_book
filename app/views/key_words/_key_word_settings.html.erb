@@ -1,0 +1,27 @@
+<%= render "shared/components/dropdown/dropdown",
+           menu_position: "left-auto right-8 -top-4" do %>
+
+  <%= render "shared/components/dropdown/dropdown_link",
+             link_text: "View Key_word",
+             link_path: key_word_path(key_word),
+             icon_name: "arrow-right" %>
+
+
+  <%= render "shared/components/dropdown/dropdown_link",
+               link_text: "Edit Key_word",
+               link_path: edit_key_word_path(key_word),
+               icon_name: "square-pen" %>
+
+
+  <%= render "shared/components/dropdown/dropdown_link",
+               link_text: "Delete Key_word",
+               icon_name: "trash",
+               link_path: key_word_path(key_word),
+               link_method: :delete,
+               button_link: true,
+               data: {
+                   turbo_method: :delete,
+                   turbo_confirm: "Really delete key_word?"
+               } %>
+
+<% end %>

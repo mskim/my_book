@@ -1,0 +1,16 @@
+<%= render "shared/components/subnav/subnav",
+             back_link_path: chapters_path do %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: edit_chapter_path(chapter),
+             link_text: "Edit Chapter",
+             icon_name: "square-pen",
+             active: current_page?(edit_chapter_path(chapter)) %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: chapter_path(chapter),
+             link_text: "View Chapter",
+             icon_name: "arrow-right",
+             active: current_page?(chapter_path(chapter)) %>
+
+<% end %>

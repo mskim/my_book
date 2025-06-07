@@ -1,0 +1,59 @@
+<%
+  user = @account_user.user
+  user_name = user.name
+  is_me = current_user.id == user.id
+%>
+
+<%= content_for(:title) do %>
+  <%= user_name %> Member Settings
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: @account.name,
+               link: account_settings_path(@account.slug) %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Team Members",
+               link: account_users_path(@account.slug) %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: user_name %>
+  <% end %>
+<% end %>
+
+
+<%= content_for(:side_col) do %>
+  <%= render "accounts/account_subnav" %>
+<% end %>
+
+<div class="space-y-12">
+  <%= render "shared/components/page_header",
+              title: "#{user_name} member settings" %>
+
+  <div class="space-y-8">
+    <% if user.account_owner?(@account) %>
+      <div class="bg-gray-50 dark:bg-gray-900 p-8 space-y-4 rounded-lg">
+        <h3><%= is_me ? "You own" : user_name + " owns" %> this account.</h3>
+        <p><%= is_me ? "You have" : user_name + " has" %> the role of <%= @account_user.role %> and as the owner, <%= is_me ? "you have" : user_name + " has" %> full access to all settings and management of other members.</p>
+      </div>
+    <% else %>
+      <%= render "account_users/form",
+                  account_user: @account_user,
+                  is_me: is_me %>
+
+      <%= link_to destroy_account_user_path(@account.slug, @account_user.id),
+                  class: "font-medium",
+                  data: {
+                    turbo_method: :delete,
+                    turbo_confirm: is_me ? "Do you really want to leave the #{@account.name} team?" : "Do you really want to remove #{user_name} from #{@account.name}?"
+                  } do %>
+        <span>
+          <%= is_me ? "Leave the #{@account.name} team" : "Remove #{user_name} from #{@account.name}" %>
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>

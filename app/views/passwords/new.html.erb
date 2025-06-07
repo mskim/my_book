@@ -1,0 +1,39 @@
+<%= content_for(:title, "Reset your password") %>
+
+<%= form_with(url: passwords_path,
+              class: "") do |f| %>
+  <%= render "shared/components/forms/errors",
+              model: @user %>
+
+  <div class="space-y-6">
+
+    <%= render "shared/components/forms/field",
+                form: f,
+                label: "Email address",
+                name: :email_address do %>
+      <%= f.email_field :email_address,
+                         placeholder: "name@domain.com",
+                         class: form_control_classes,
+                         autofocus: true %>
+    <% end %>
+
+    <div class="space-y-6 text-center pt-2">
+      <%= f.submit "Email reset instructions",
+                    class: "w-full text-center btn btn-primary btn-large" %>
+
+      <div class="space-y-4 font-medium
+                  sm:space-y-0 sm:flex sm:items-center sm:justify-between sm:space-x-4">
+        <div>
+          <%= link_to new_session_path,
+                      class: "inline-block ml-2" do %>
+            Back to login
+          <% end %>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+<% end %>

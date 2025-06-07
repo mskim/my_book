@@ -1,0 +1,31 @@
+<%
+  user = local_assigns[:user]
+  user_name = user.name
+  is_me = current_user.id == user.id
+%>
+
+<%= render "shared/components/dropdown/dropdown",
+           menu_position: "left-auto right-8 -top-4",
+           menu_width: "w-56" do %>
+
+  <%= render "shared/components/dropdown/dropdown_link",
+               link_text: is_me ? "Edit my role" : "Edit role",
+               link_path: edit_account_user_path(@account.slug, account_user.id),
+               icon_name: "user-pen" %>
+
+  <% confirm_text = if is_me
+                      "Are you sure you want to leave #{@account.name}?"
+                    else
+                      "Are you sure you want to remove #{user_name} from #{@account.name}?"
+                    end
+  %>
+  <%= render "shared/components/dropdown/dropdown_link",
+               link_text: is_me ? "Leave team" : "Remove member",
+               link_path: destroy_account_user_path(@account.slug, account_user.id),
+               icon_name: "user-x",
+               data: {
+                 turbo_method: :delete,
+                 turbo_confirm: confirm_text
+               } %>
+
+<% end %>

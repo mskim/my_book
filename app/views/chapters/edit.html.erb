@@ -1,0 +1,33 @@
+<%= content_for(:title) do %>
+  Edit <%= @chapter.title %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Chapters",
+               link: chapters_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               link: chapter_path(@chapter),
+               text: @chapter.title %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Edit" %>
+  <% end %>
+<% end %>
+
+<% content_for(:side_col) do %>
+  <%= render "chapters/chapter_subnav",
+             active: "edit_chapter",
+             chapter: @chapter %>
+<% end %>
+
+<div class="space-y-12">
+
+  <%= render "shared/components/page_header",
+              title: "Edit chapter" %>
+
+  <%= render 'form',
+              chapter: @chapter %>
+</div>

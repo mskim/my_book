@@ -1,0 +1,33 @@
+<%= content_for(:title) do %>
+  Edit <%= @section.title %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Sections",
+               link: sections_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               link: section_path(@section),
+               text: @section.title %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Edit" %>
+  <% end %>
+<% end %>
+
+<% content_for(:side_col) do %>
+  <%= render "sections/section_subnav",
+             active: "edit_section",
+             section: @section %>
+<% end %>
+
+<div class="space-y-12">
+
+  <%= render "shared/components/page_header",
+              title: "Edit section" %>
+
+  <%= render 'form',
+              section: @section %>
+</div>

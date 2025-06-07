@@ -1,0 +1,7 @@
+<%= render "shared/components/listings/listing",
+           listing_link: key_word_path(key_word),
+           title: key_word.word,
+           description: "Created #{time_ago_in_words(key_word.created_at)} ago" do %>
+  <%= render "key_word_settings",
+             key_word: key_word %>
+<% end %>

@@ -1,0 +1,53 @@
+<%= content_for(:title) do %>
+  <%= @account.name %> Team Members
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: @account.name,
+               link: account_settings_path(@account.slug) %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Team Members" %>
+  <% end %>
+<% end %>
+
+<%= content_for(:side_col) do %>
+  <%= render "accounts/account_subnav" %>
+<% end %>
+
+<div class="space-y-12">
+
+  <% if @account_users.any? %>
+    <%= render "shared/components/page_header",
+                title: "#{@account.name} Team Members",
+                button_link_path: new_invitation_path(@account.slug),
+                button_link_text: "Invite Someone" %>
+
+
+    <div class="space-y-6">
+
+      <%= render "shared/components/listings/listings" do %>
+        <% @account_users.each do |account_user| %>
+          <%= render "account_users/account_user_listing",
+                      account_user: account_user %>
+        <% end %>
+      <% end %>
+
+      <% if @pagy.pages > 1 %>
+        <div class="pagy-container">
+          <%== pagy_nav(@pagy) %>
+        </div>
+      <% end %>
+
+    </div>
+
+  <% else %>
+    <%= render "shared/components/listings/no_listings",
+                singular_object_name: "Team Member",
+                plural_object_name: "Team Members",
+                new_path: new_invitation_path(@account) %>
+  <% end %>
+
+</div>

@@ -1,0 +1,33 @@
+<%= content_for(:title) do %>
+  Edit <%= @book.title %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Books",
+               link: books_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               link: book_path(@book),
+               text: @book.title %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Edit" %>
+  <% end %>
+<% end %>
+
+<% content_for(:side_col) do %>
+  <%= render "books/book_subnav",
+             active: "edit_book",
+             book: @book %>
+<% end %>
+
+<div class="space-y-12">
+
+  <%= render "shared/components/page_header",
+              title: "Edit book" %>
+
+  <%= render 'form',
+              book: @book %>
+</div>

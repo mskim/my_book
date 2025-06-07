@@ -1,0 +1,16 @@
+<%= render "shared/components/subnav/subnav",
+             back_link_path: books_path do %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: edit_book_path(book),
+             link_text: "Edit Book",
+             icon_name: "square-pen",
+             active: current_page?(edit_book_path(book)) %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: book_path(book),
+             link_text: "View Book",
+             icon_name: "arrow-right",
+             active: current_page?(book_path(book)) %>
+
+<% end %>

@@ -1,0 +1,45 @@
+<%= content_for(:title) do %>
+  Admin | Accounts
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+                text: "Admin",
+                link: admin_dashboard_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+                text: "Accounts" %>
+  <% end %>
+<% end %>
+
+<div class="space-y-12">
+
+  <% if @accounts.any? %>
+    <%= render "shared/components/page_header",
+                title: "Accounts" %>
+
+    <div class="space-y-6">
+
+      <%= render "shared/components/listings/listings" do %>
+        <% @accounts.each do |account| %>
+          <%= render "admin/accounts/account_listing",
+                      account: account %>
+        <% end %>
+      <% end %>
+
+      <% if @pagy.pages > 1 %>
+        <div class="pagy-container">
+          <%== pagy_nav(@pagy) %>
+        </div>
+      <% end %>
+
+    </div>
+
+  <% else %>
+    <%= render "shared/components/listings/no_listings",
+                singular_object_name: "account",
+                plural_object_name: "accounts" %>
+  <% end %>
+
+</div>

@@ -1,0 +1,10 @@
+<div>
+  <%= @invitation.message %>
+</div>
+
+<div style="margin-top: 35px;">
+  <%= link_to accept_invitation_url(@account.slug, @invitation.id, token: @invitation.token),
+      style: @button_style do %>
+    Accept Invitation
+  <% end %>
+</div>

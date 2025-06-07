@@ -1,0 +1,25 @@
+<%= content_for(:title) do %>
+  New Book
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Books",
+               link: books_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "New book" %>
+  <% end %>
+<% end %>
+
+<%= content_for(:page_max_width, 'max-w-2xl') %>
+
+<div class="space-y-12">
+  <%= render "shared/components/page_header",
+              title: "New book" %>
+
+  <%= render 'form',
+              book: @book %>
+</div>

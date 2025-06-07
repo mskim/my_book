@@ -1,0 +1,53 @@
+<%= content_for(:title, "Log in") %>
+
+<%= form_with(url: session_url,
+              class: "") do |f| %>
+  <%= render "shared/components/forms/errors",
+              model: @user %>
+
+  <div class="space-y-6">
+
+    <%= render "shared/components/forms/field",
+                form: f,
+                label: "Email address",
+                name: :email_address do %>
+      <%= f.email_field :email_address,
+                         placeholder: "name@domain.com",
+                         class: form_control_classes,
+                         autofocus: true %>
+    <% end %>
+
+    <%= render "shared/components/forms/field",
+                form: f,
+                label: "Password",
+                name: :password do %>
+      <%= f.password_field :password,
+                            placeholder: "Create a password",
+                            class: form_control_classes %>
+    <% end %>
+
+    <div class="space-y-6 text-center pt-2">
+      <%= f.submit "Sign in",
+                    class: "w-full text-center btn btn-primary btn-large" %>
+
+      <div class="space-y-4 font-medium
+                  sm:space-y-0 sm:flex sm:items-center sm:justify-between sm:space-x-4">
+        <div>
+          New user?
+          <%= link_to new_registration_path,
+                      class: "inline-block ml-2" do %>
+            Sign up
+          <% end %>
+        </div>
+
+        <%= link_to new_password_path,
+                    class: "inline-block" do %>
+          Forgot password?
+        <% end %>
+      </div>
+
+    </div>
+
+  </div>
+
+<% end %>

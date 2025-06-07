@@ -1,0 +1,46 @@
+<%= form_with(model: @key_word,
+               url: @key_word.new_record? ? key_words_path : key_word_path(@key_word),
+               local: true) do |f| %>
+  <%= render 'shared/components/forms/errors', model: @key_word %>
+
+  <div class="space-y-8">
+
+    <%= render "shared/components/forms/field",
+                 form: f,
+                 label: "Word",
+                 name: :word do %>
+      <%= f.text_field :word,
+                        placeholder: "Word",
+                        class: form_control_classes,
+                        autofocus: true %>
+    <% end %>
+
+    
+    <% unless @key_word.new_record? %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Section",
+                  name: :section do %>
+        <%= f.text_field :section,
+                placeholder: "Section",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Slug",
+                  name: :slug do %>
+        <%= f.text_field :slug,
+                placeholder: "Slug",
+                class: form_control_classes%>
+      <% end %>
+      
+    <% end %>
+    
+    <div>
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+
+  </div>
+<% end %>

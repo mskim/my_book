@@ -1,0 +1,25 @@
+<%= content_for(:title) do %>
+  New Key_word
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Key_words",
+               link: key_words_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "New key_word" %>
+  <% end %>
+<% end %>
+
+<%= content_for(:page_max_width, 'max-w-2xl') %>
+
+<div class="space-y-12">
+  <%= render "shared/components/page_header",
+              title: "New key_word" %>
+
+  <%= render 'form',
+              key_word: @key_word %>
+</div>

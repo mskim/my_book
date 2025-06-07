@@ -1,0 +1,16 @@
+<%= render "shared/components/subnav/subnav",
+             back_link_path: key_words_path do %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: edit_key_word_path(key_word),
+             link_text: "Edit Key_word",
+             icon_name: "square-pen",
+             active: current_page?(edit_key_word_path(key_word)) %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: key_word_path(key_word),
+             link_text: "View Key_word",
+             icon_name: "arrow-right",
+             active: current_page?(key_word_path(key_word)) %>
+
+<% end %>

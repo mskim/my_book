@@ -1,0 +1,23 @@
+<%= content_for(:title) do %>
+  Admin Dashboard
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+                text: "Admin Dashboard" %>
+  <% end %>
+<% end %>
+
+<div class="space-y-12">
+
+  <%= render "shared/components/page_header",
+              title: "Admin Dashboard" %>
+
+  <div class="space-y-6">
+
+    Hello, admin!
+
+  </div>
+
+</div>

@@ -1,0 +1,7 @@
+<%= render "shared/components/listings/listing",
+           listing_link: book_path(book),
+           title: book.title,
+           description: "Created #{time_ago_in_words(book.created_at)} ago" do %>
+  <%= render "book_settings",
+             book: book %>
+<% end %>

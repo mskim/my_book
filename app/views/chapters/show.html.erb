@@ -1,0 +1,30 @@
+<%= content_for(:title) do %>
+  <%= @chapter.title %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Chapters",
+               link: chapters_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: @chapter.title %>
+  <% end %>
+<% end %>
+
+<% content_for(:side_col) do %>
+  <%= render "chapters/chapter_subnav",
+             active: "edit_chapter",
+             chapter: @chapter %>
+<% end %>
+
+<div class="space-y-12">
+  <%= render "shared/components/page_header",
+              title: @chapter.title %>
+
+  <div>
+    This is the show view for the chapter, <%= @chapter.title %>.
+  </div>
+
+</div>

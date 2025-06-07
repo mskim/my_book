@@ -1,0 +1,10 @@
+<p>An account has been created:</p>
+
+<p><strong>Account name:</strong><br>
+<%= @account.name %></p>
+
+<p><strong>Account owner:</strong><br>
+<%= @account.owner.email_address %></p>
+
+<p><strong>Admin account profile:</strong><br>
+<a href="<%= admin_account_url(@account.id) %>"><%= admin_account_url(@account.id) %></a></p>

@@ -1,0 +1,55 @@
+<%= form_with(model: @book,
+               url: @book.new_record? ? books_path : book_path(@book),
+               local: true) do |f| %>
+  <%= render 'shared/components/forms/errors', model: @book %>
+
+  <div class="space-y-8">
+
+    <%= render "shared/components/forms/field",
+                 form: f,
+                 label: "Title",
+                 name: :title do %>
+      <%= f.text_field :title,
+                        placeholder: "Title",
+                        class: form_control_classes,
+                        autofocus: true %>
+    <% end %>
+
+    
+    <% unless @book.new_record? %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Subtitle",
+                  name: :subtitle do %>
+        <%= f.text_field :subtitle,
+                placeholder: "Subtitle",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Slug",
+                  name: :slug do %>
+        <%= f.text_field :slug,
+                placeholder: "Slug",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Author",
+                  name: :author do %>
+        <%= f.text_field :author,
+                placeholder: "Author",
+                class: form_control_classes%>
+      <% end %>
+      
+    <% end %>
+    
+    <div>
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+
+  </div>
+<% end %>

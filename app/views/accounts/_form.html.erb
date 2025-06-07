@@ -1,0 +1,38 @@
+<%= form_for @account,
+            url: @account.new_record? ? accounts_path : update_account_path(@account.slug),
+            method: @account.new_record? ? :post : :patch do |f| %>
+  <%= render 'shared/components/forms/errors', model: @account %>
+
+  <div class="space-y-8">
+
+    <%= render "shared/components/forms/field",
+                form: f,
+                label: "Account name",
+                name: :name do %>
+      <%= f.text_field :name,
+                        placeholder: "Account name",
+                        class: form_control_classes,
+                        autofocus: true %>
+    <% end %>
+
+    <% unless @account.new_record? %>
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Account slug",
+                  name: :slug do %>
+        <%= f.text_field :slug,
+                          placeholder: "Account slug",
+                          class: form_control_classes %>
+      <% end %>
+    <% end %>
+
+    <%= f.hidden_field :owner_id, value: current_user.id %>
+
+  </div>
+
+  <div class="mt-12">
+    <%= f.submit class: "btn btn-primary" do %>
+      <%= @account.new_record? ? "Create" : "Update" %>
+    <% end %>
+  </div>
+<% end %>

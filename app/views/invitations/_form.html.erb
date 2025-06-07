@@ -1,0 +1,83 @@
+<%= form_with(model: invitation,
+              url: invitation.new_record? ? create_invitation_path(@account.slug) : update_invitation_path(@account.slug, invitation.id),
+              local: true) do |f| %>
+  <%= f.hidden_field :created_by_user_id, value: current_user.id %>
+
+  <div class="space-y-8">
+    <%= render "shared/components/forms/field",
+                form: f,
+                label: "Email",
+                name: :email do %>
+      <%= f.email_field :email,
+                        placeholder: 'Email',
+                        class: form_control_classes,
+                        autofocus: true %>
+    <% end %>
+
+    <%= render "shared/components/forms/field",
+                form: f,
+                label: "Invitation Message",
+                name: :message,
+                tooltip: "This will be the body of the email sent to the invitee.  Below this message will be a link for the invitee to click to accept their invitation.",
+                rich_text_field: true do %>
+      <%= f.rich_text_area :message,
+                            placeholder: 'Write a personalized message to the invitee',
+                            value: invitation.new_record? ? "You're invited to join #{@account.name}.  Click the link below to accept your invitation." : invitation.message,
+                            data: {
+                              controller: "components--rich-text",
+                              action: "focus->components--rich-text#focus blur->components--rich-text#unfocus"
+                            } %>
+    <% end %>
+
+    <%= render "shared/components/forms/field",
+                form: f,
+                label: "Role",
+                name: :role,
+                tooltip: "This will be the role of the invitee in #{@account.name} after they accept their invitation.  You can change this later in the member's settings.",
+                select_field: true do %>
+      <%= f.select :role,
+                    options_for_select([["Member", "member"], ["Admin", "admin"]], invitation.role || "member"),
+                    {},
+                    { class: "form-control" } %>
+    <% end %>
+
+    <div class="pt-4 space-y-4 flex flex-col items-start
+                sm:flex-row sm:items-center sm:space-x-4 sm:space-y-0">
+      <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+        <% if invitation.new_record? %>
+          <%= icon("send") %>
+          <span>
+            Send invitation
+          </span>
+        <% else %>
+          <span>
+            Update invitation
+          </span>
+        <% end %>
+      <% end %>
+
+      <% unless invitation.new_record? %>
+        <%= link_to resend_invitation_path(@account.slug, @invitation.id),
+                    class: "btn btn-secondary" do %>
+          <%= icon("send") %>
+          <span>
+            Resend
+          </span>
+        <% end %>
+
+        <%= link_to destroy_invitation_path(@account.slug, @invitation.id),
+                    class: "inline-flex items-center space-x-2 sm:btn sm:btn-ghost" ,
+                    data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Really delete Invitation?"
+                    } do %>
+          <%= icon("x") %>
+          <span>
+            Cancel invitation
+          </span>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
+<% end %>
